@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']}, {'packages':['timeline']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        const time = {{time | tojson}}
+        const temp_values = {{ temp_values | tojson}};
+        console.log(temp_values);
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Time (hrs)');
+        data.addColumn('number', 'Temperature (°F)');
+        var day = 25;
+        for (var i = 0; i < temp_values.length; i++) {
+            console.log(temp_values[i]);
+            if ("0" == time[i])
+            {
+              day = 26;
+            }
+            data.addRows([
+            [new Date(2019, 10, day, time[i], 30), temp_values[i]]
+            ])
+        }
+        var options = {
+          title: 'Temperature (°F) vs Time',
+          curveType: 'function',
+          legend: { position: 'right' },
+          vAxis: {
+            title: 'Temperature (deg F)'
+          },
+          hAxis: {
+            title: 'Time (hours)'
+          }
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+        chart.draw(data, options);
+      }
+    </script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']}, {'packages':['timeline']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        const time = {{time | tojson}};
+        const hum_values = {{ hum_val | tojson}};
+        console.log(hum_values);
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Time (hrs)');
+        data.addColumn('number', 'Humidity (%)');
+        for (var i = 0; i < hum_values.length; i++) {
+            console.log(hum_values[i]);
+            data.addRows([
+            [new Date(2019, 10, 25, time[i], 30), hum_values[i]]
+            ])
+        }
+        var options = {
+          title: 'Humidity (%) vs Time',
+          curveType: 'function',
+          legend: { position: 'right' },
+          vAxis: {
+            title: 'Humidity (%)'
+          },
+          hAxis: {
+            title: 'Time (hours)'
+          }
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart2'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+        {% extends "base.html" %}
+        {% block content %}
+        <h1 style="color:lightcoral;text-align:center;"> Welcome {{ message }}</h1>
+        <h2 style="color: darkcyan;text-align:center;">Data for {{ user_location }}</h2>
+    <div id="curve_chart" style="width: 900px; height: 500px; margin:auto;"></div>
+
+    <div id="curve_chart2" style="width: 900px; height: 500px; margin:auto;"></div>
+        {% endblock %}
+  </body>
+</html>

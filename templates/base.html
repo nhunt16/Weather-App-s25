@@ -1,0 +1,28 @@
+<html>
+    <head>
+      <title>s25 Weather App</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <style>
+      body {
+  margin-bottom: 100px;
+  margin-right: 150px;
+  margin-left: 80px;
+}
+    input {
+        display: inline-block;
+    }
+    </style>
+    <body>
+          <!-- As a link -->
+      <nav class="navbar navbar-light bg-light">
+          <div class="d-flex p-2">
+              <a class="navbar-brand" href="/">Home</a>
+              <a class="navbar-brand" href="/manage">Locations</a>
+              <a class="navbar-brand" href="/google/logout">Logout</a>
+          </div>
+      </nav>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>

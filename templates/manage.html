@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>My Locations</h2>
+{% for value in result %}
+  <ul>
+    <li>{{value}}
+    <form action="/del-loc/{{value}}" method="post">
+      <input type="submit" value="Delete">
+    </form>
+  <form action="/dataviz/{{value}}">
+  <input type="submit" value ="Visualize"> </form>
+
+  <form action="/current-loc/{{value}}" method="post">
+  <input type="submit" value ="Set as Current Location"> </form>
+</li>
+
+  </ul>
+{% endfor %}
+
+<br>
+
+<form method="POST">
+  <h2>Add New Location</h2> <input type="text" name="location"><br>
+  <input type="submit" value="Submit"><br>
+</form>
+{% endblock %}
